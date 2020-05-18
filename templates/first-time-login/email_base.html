@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<body bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;height: 100%;width: 100%!important;">
+    <!-- BODY -->
+    <table class="body-wrap" bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};width: 100%;">
+        <tr style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};">
+            <td style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};"></td>
+            <td class="container" bgcolor="{{ settings.EMAIL.CONTENT_COLOR }}" style="margin: 0 auto!important;padding: 0;{{ settings.EMAIL.FONT_CSS }};display: block!important;max-width: 600px!important;clear: both!important;">
+
+                <div class="content" style="margin: 0 auto;padding: 15px;{{ settings.EMAIL.FONT_CSS }};max-width: 600px;display: block;">
+                    <table style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};width: 100%;">
+                        <tr style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};">
+                            <td style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};">
+                                {% block content %}{% endblock %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+
+            </td>
+            <td style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};"></td>
+        </tr>
+    </table>
+    <!-- /BODY -->
+
+    <table class="body-wrap" bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};width: 100%;">
+        <tr>
+            <td>
+                <p>
+                    **********************************
+                </p>
+                <p>
+                    株式会社コーチ・エィ／3分間コーチサポート　
+                </p>
+                <p>
+                    102-0074　東京都千代田区九段南2-1-30
+                </p>
+                <p>
+                    イタリア文化会館ビル　9階・10階
+                </p>
+                <p>
+                    coacha_3mins@coacha.com　
+                </p>
+                <p>
+                   **********************************
+                </p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

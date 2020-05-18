@@ -1,0 +1,3007 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.12 (Ubuntu 10.12-2.pgdg18.04+1)
+-- Dumped by pg_dump version 12.2 (Ubuntu 12.2-2.pgdg18.04+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+--
+-- Name: activity_log_activitylog; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.activity_log_activitylog (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    "user" character varying(256) NOT NULL,
+    request_url character varying(256) NOT NULL,
+    request_method character varying(10) NOT NULL,
+    response_code character varying(3) NOT NULL,
+    datetime timestamp with time zone NOT NULL,
+    ip_address inet,
+    extra_data text
+);
+
+
+ALTER TABLE public.activity_log_activitylog OWNER TO postgres;
+
+--
+-- Name: activity_log_activitylog_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.activity_log_activitylog_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.activity_log_activitylog_id_seq OWNER TO postgres;
+
+--
+-- Name: activity_log_activitylog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.activity_log_activitylog_id_seq OWNED BY public.activity_log_activitylog.id;
+
+
+--
+-- Name: answer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.answer (
+    id integer NOT NULL,
+    count_assessment integer NOT NULL,
+    point integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    company_id integer NOT NULL,
+    question_id integer NOT NULL,
+    user_id integer NOT NULL,
+    workshop_id integer NOT NULL
+);
+
+
+ALTER TABLE public.answer OWNER TO postgres;
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.answer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.answer_id_seq OWNER TO postgres;
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.answer_id_seq OWNED BY public.answer.id;
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: company; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.company (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    address character varying(255),
+    total_staff integer,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.company OWNER TO postgres;
+
+--
+-- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.company_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.company_id_seq OWNER TO postgres;
+
+--
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.company_id_seq OWNED BY public.company.id;
+
+
+--
+-- Name: corsheaders_corsmodel; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.corsheaders_corsmodel (
+    id integer NOT NULL,
+    cors character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.corsheaders_corsmodel OWNER TO postgres;
+
+--
+-- Name: corsheaders_corsmodel_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.corsheaders_corsmodel_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.corsheaders_corsmodel_id_seq OWNER TO postgres;
+
+--
+-- Name: corsheaders_corsmodel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.corsheaders_corsmodel_id_seq OWNED BY public.corsheaders_corsmodel.id;
+
+
+--
+-- Name: csaplus24_average; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.csaplus24_average (
+    id_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    category character varying(20) NOT NULL,
+    type character varying(20) NOT NULL,
+    factor text NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.csaplus24_average OWNER TO postgres;
+
+--
+-- Name: csaplus24_coefficient; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.csaplus24_coefficient (
+    id_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    category character varying(20) NOT NULL,
+    type character varying(20) NOT NULL,
+    factor text NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.csaplus24_coefficient OWNER TO postgres;
+
+--
+-- Name: department; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.department (
+    id integer NOT NULL,
+    name character varying(255),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.department OWNER TO postgres;
+
+--
+-- Name: department_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.department_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.department_id_seq OWNER TO postgres;
+
+--
+-- Name: department_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.department_id_seq OWNED BY public.department.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_rest_passwordreset_resetpasswordtoken (
+    created_at timestamp with time zone NOT NULL,
+    key character varying(64) NOT NULL,
+    ip_address inet NOT NULL,
+    user_agent character varying(256) NOT NULL,
+    user_id integer NOT NULL,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE public.django_rest_passwordreset_resetpasswordtoken OWNER TO postgres;
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.django_rest_passwordreset_resetpasswordtoken_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_rest_passwordreset_resetpasswordtoken_id_seq OWNER TO postgres;
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.django_rest_passwordreset_resetpasswordtoken_id_seq OWNED BY public.django_rest_passwordreset_resetpasswordtoken.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: email_post_content; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.email_post_content (
+    id integer NOT NULL,
+    count_send_email integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.email_post_content OWNER TO postgres;
+
+--
+-- Name: email_post_content_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.email_post_content_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.email_post_content_id_seq OWNER TO postgres;
+
+--
+-- Name: email_post_content_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.email_post_content_id_seq OWNED BY public.email_post_content.id;
+
+
+--
+-- Name: mail_magazine; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.mail_magazine (
+    id integer NOT NULL,
+    vol_version integer NOT NULL,
+    title character varying(255) NOT NULL,
+    content text NOT NULL,
+    status boolean NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.mail_magazine OWNER TO postgres;
+
+--
+-- Name: mail_magazine_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.mail_magazine_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mail_magazine_id_seq OWNER TO postgres;
+
+--
+-- Name: mail_magazine_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.mail_magazine_id_seq OWNED BY public.mail_magazine.id;
+
+
+--
+-- Name: meanvalue_stddeviation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.meanvalue_stddeviation (
+    id integer NOT NULL,
+    type character varying(20) NOT NULL,
+    average_value double precision NOT NULL,
+    standard_deviation double precision NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.meanvalue_stddeviation OWNER TO postgres;
+
+--
+-- Name: meanvalue_stddeviation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.meanvalue_stddeviation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.meanvalue_stddeviation_id_seq OWNER TO postgres;
+
+--
+-- Name: meanvalue_stddeviation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.meanvalue_stddeviation_id_seq OWNED BY public.meanvalue_stddeviation.id;
+
+
+--
+-- Name: oauth2_provider_accesstoken_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oauth2_provider_accesstoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_accesstoken_id_seq OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_accesstoken; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oauth2_provider_accesstoken (
+    id bigint DEFAULT nextval('public.oauth2_provider_accesstoken_id_seq'::regclass) NOT NULL,
+    token character varying(255) NOT NULL,
+    expires timestamp with time zone NOT NULL,
+    scope text NOT NULL,
+    application_id bigint,
+    user_id integer,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    source_refresh_token_id bigint
+);
+
+
+ALTER TABLE public.oauth2_provider_accesstoken OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_application_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oauth2_provider_application_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_application_id_seq OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_application; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oauth2_provider_application (
+    id bigint DEFAULT nextval('public.oauth2_provider_application_id_seq'::regclass) NOT NULL,
+    client_id character varying(100) NOT NULL,
+    redirect_uris text NOT NULL,
+    client_type character varying(32) NOT NULL,
+    authorization_grant_type character varying(32) NOT NULL,
+    client_secret character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    user_id integer,
+    skip_authorization boolean NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.oauth2_provider_application OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_grant_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oauth2_provider_grant_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_grant_id_seq OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_grant; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oauth2_provider_grant (
+    id bigint DEFAULT nextval('public.oauth2_provider_grant_id_seq'::regclass) NOT NULL,
+    code character varying(255) NOT NULL,
+    expires timestamp with time zone NOT NULL,
+    redirect_uri character varying(255) NOT NULL,
+    scope text NOT NULL,
+    application_id bigint NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.oauth2_provider_grant OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_refreshtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.oauth2_provider_refreshtoken_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.oauth2_provider_refreshtoken_id_seq OWNER TO postgres;
+
+--
+-- Name: oauth2_provider_refreshtoken; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.oauth2_provider_refreshtoken (
+    id bigint DEFAULT nextval('public.oauth2_provider_refreshtoken_id_seq'::regclass) NOT NULL,
+    token character varying(255) NOT NULL,
+    access_token_id bigint,
+    application_id bigint NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    revoked timestamp with time zone
+);
+
+
+ALTER TABLE public.oauth2_provider_refreshtoken OWNER TO postgres;
+
+--
+-- Name: profile; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.profile (
+    id integer NOT NULL,
+    employee_id character varying(255),
+    first_furigana character varying(255),
+    last_furigana character varying(255),
+    language character varying(255),
+    birthday date,
+    sex character varying(5),
+    "position" character varying(255),
+    company_date_joined date,
+    authority character varying(255),
+    is_send_email boolean NOT NULL,
+    company_id integer NOT NULL,
+    department_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.profile OWNER TO postgres;
+
+--
+-- Name: profile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.profile_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profile_id_seq OWNER TO postgres;
+
+--
+-- Name: profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.profile_id_seq OWNED BY public.profile.id;
+
+
+--
+-- Name: questions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.questions (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    category character varying(20) NOT NULL,
+    type character varying(20) NOT NULL,
+    factor double precision NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.questions OWNER TO postgres;
+
+--
+-- Name: questions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.questions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.questions_id_seq OWNER TO postgres;
+
+--
+-- Name: questions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.questions_id_seq OWNED BY public.questions.id;
+
+
+--
+-- Name: result; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.result (
+    id integer NOT NULL,
+    count_assessment double precision NOT NULL,
+    score_listen double precision,
+    score_ask_questions double precision,
+    score_advance double precision,
+    score_retention double precision,
+    score_sharing_purpose double precision,
+    score_personal_reciprocal double precision,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    total_average_score double precision,
+    total_normdist_score double precision,
+    company_id integer NOT NULL,
+    user_id integer NOT NULL,
+    workshop_id integer NOT NULL
+);
+
+
+ALTER TABLE public.result OWNER TO postgres;
+
+--
+-- Name: result_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.result_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.result_id_seq OWNER TO postgres;
+
+--
+-- Name: result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.result_id_seq OWNED BY public.result.id;
+
+
+--
+-- Name: user_workshop; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.user_workshop (
+    id integer NOT NULL,
+    completed_assessment boolean NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    company_id integer NOT NULL,
+    user_id integer NOT NULL,
+    workshop_id integer NOT NULL
+);
+
+
+ALTER TABLE public.user_workshop OWNER TO postgres;
+
+--
+-- Name: user_workshop_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.user_workshop_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_workshop_id_seq OWNER TO postgres;
+
+--
+-- Name: user_workshop_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.user_workshop_id_seq OWNED BY public.user_workshop.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    last_activity timestamp with time zone NOT NULL,
+    is_user_admin boolean NOT NULL,
+    cronjob_mail_magazine character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_groups; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_groups OWNER TO postgres;
+
+--
+-- Name: users_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: users_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_groups_id_seq OWNED BY public.users_groups.id;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: users_user_permissions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_user_permissions OWNER TO postgres;
+
+--
+-- Name: users_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: users_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_user_permissions_id_seq OWNED BY public.users_user_permissions.id;
+
+
+--
+-- Name: workshop; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.workshop (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    date_workshop date NOT NULL,
+    total_user_join integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    company_id integer NOT NULL
+);
+
+
+ALTER TABLE public.workshop OWNER TO postgres;
+
+--
+-- Name: workshop_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.workshop_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.workshop_id_seq OWNER TO postgres;
+
+--
+-- Name: workshop_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.workshop_id_seq OWNED BY public.workshop.id;
+
+
+--
+-- Name: activity_log_activitylog id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.activity_log_activitylog ALTER COLUMN id SET DEFAULT nextval('public.activity_log_activitylog_id_seq'::regclass);
+
+
+--
+-- Name: answer id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer ALTER COLUMN id SET DEFAULT nextval('public.answer_id_seq'::regclass);
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: company id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.company ALTER COLUMN id SET DEFAULT nextval('public.company_id_seq'::regclass);
+
+
+--
+-- Name: corsheaders_corsmodel id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.corsheaders_corsmodel ALTER COLUMN id SET DEFAULT nextval('public.corsheaders_corsmodel_id_seq'::regclass);
+
+
+--
+-- Name: department id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.department ALTER COLUMN id SET DEFAULT nextval('public.department_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_rest_passwordreset_resetpasswordtoken ALTER COLUMN id SET DEFAULT nextval('public.django_rest_passwordreset_resetpasswordtoken_id_seq'::regclass);
+
+
+--
+-- Name: email_post_content id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.email_post_content ALTER COLUMN id SET DEFAULT nextval('public.email_post_content_id_seq'::regclass);
+
+
+--
+-- Name: mail_magazine id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.mail_magazine ALTER COLUMN id SET DEFAULT nextval('public.mail_magazine_id_seq'::regclass);
+
+
+--
+-- Name: meanvalue_stddeviation id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.meanvalue_stddeviation ALTER COLUMN id SET DEFAULT nextval('public.meanvalue_stddeviation_id_seq'::regclass);
+
+
+--
+-- Name: profile id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile ALTER COLUMN id SET DEFAULT nextval('public.profile_id_seq'::regclass);
+
+
+--
+-- Name: questions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.questions ALTER COLUMN id SET DEFAULT nextval('public.questions_id_seq'::regclass);
+
+
+--
+-- Name: result id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result ALTER COLUMN id SET DEFAULT nextval('public.result_id_seq'::regclass);
+
+
+--
+-- Name: user_workshop id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_workshop ALTER COLUMN id SET DEFAULT nextval('public.user_workshop_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: users_groups id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_groups ALTER COLUMN id SET DEFAULT nextval('public.users_groups_id_seq'::regclass);
+
+
+--
+-- Name: users_user_permissions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.users_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: workshop id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.workshop ALTER COLUMN id SET DEFAULT nextval('public.workshop_id_seq'::regclass);
+
+
+--
+-- Data for Name: activity_log_activitylog; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.activity_log_activitylog (id, user_id, "user", request_url, request_method, response_code, datetime, ip_address, extra_data) FROM stdin;
+1	0	anon_None	http://127.0.0.1:8000/accounts/login/?next=/o/applications/	GET	200	2020-03-04 17:50:23.876574+07	127.0.0.1	\N
+2	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/	GET	200	2020-03-04 17:50:33.533392+07	127.0.0.1	\N
+3	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/register/	GET	200	2020-03-04 17:50:36.00131+07	127.0.0.1	\N
+4	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/1/	GET	200	2020-03-04 17:50:45.368229+07	127.0.0.1	\N
+5	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/	GET	200	2020-03-04 17:53:00.616006+07	127.0.0.1	\N
+6	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/1/	GET	200	2020-03-04 17:53:02.024608+07	127.0.0.1	\N
+7	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/1/update/	GET	200	2020-03-04 17:53:05.230725+07	127.0.0.1	\N
+8	1	hoavt@ominext.com	http://127.0.0.1:8000/o/applications/1/	GET	200	2020-03-04 17:53:26.895952+07	127.0.0.1	\N
+9	0	anon_None	http://127.0.0.1:8000/o/token/	POST	200	2020-03-04 17:53:30.289872+07	127.0.0.1	\N
+10	0	anon_None	http://127.0.0.1:8000/v1/auth/login	POST	200	2020-03-04 17:53:30.295053+07	127.0.0.1	\N
+11	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/meanvalue-stddeviation/import-csv	POST	200	2020-03-04 17:54:00.10863+07	127.0.0.1	\N
+12	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:54:05.651797+07	127.0.0.1	\N
+13	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:54:21.681922+07	127.0.0.1	\N
+14	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:55:43.834415+07	127.0.0.1	\N
+15	0	anon_None	http://127.0.0.1:8000/o/token/	POST	200	2020-03-04 17:56:12.246111+07	127.0.0.1	\N
+16	0	anon_None	http://127.0.0.1:8000/v1/auth/login	POST	200	2020-03-04 17:56:12.25262+07	127.0.0.1	\N
+17	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:56:15.221963+07	127.0.0.1	\N
+18	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:56:43.945201+07	127.0.0.1	\N
+19	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:57:32.782104+07	127.0.0.1	\N
+20	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:57:55.76377+07	127.0.0.1	\N
+21	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:58:35.176932+07	127.0.0.1	\N
+22	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 17:58:47.370217+07	127.0.0.1	\N
+23	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/coefficient-import	POST	200	2020-03-04 18:00:33.749152+07	127.0.0.1	\N
+24	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 18:02:16.696058+07	127.0.0.1	\N
+25	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/questions/import-csv	POST	200	2020-03-04 18:03:16.302645+07	127.0.0.1	\N
+26	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/average-import	POST	200	2020-03-04 18:03:29.532484+07	127.0.0.1	\N
+27	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/csaplus24/coefficient-import	POST	200	2020-03-04 18:03:34.427349+07	127.0.0.1	\N
+28	0	anon_None	http://127.0.0.1:8000/o/token/	POST	200	2020-03-05 08:35:05.392773+07	127.0.0.1	\N
+29	0	anon_None	http://127.0.0.1:8000/v1/auth/login	POST	200	2020-03-05 08:35:05.39615+07	127.0.0.1	\N
+30	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/questions/list	GET	200	2020-03-05 08:35:08.058279+07	127.0.0.1	\N
+31	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/questions/history-result-answer-question	GET	200	2020-03-05 08:35:22.380186+07	127.0.0.1	\N
+32	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/meanvalue-stddeviation/import-csv	POST	200	2020-03-05 08:35:35.891968+07	127.0.0.1	\N
+33	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/	GET	200	2020-03-05 08:35:54.666129+07	127.0.0.1	\N
+34	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:36:14.698401+07	127.0.0.1	\N
+35	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:36:32.986386+07	127.0.0.1	\N
+36	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:36:46.943337+07	127.0.0.1	\N
+37	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:36:54.736361+07	127.0.0.1	\N
+38	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:02.782635+07	127.0.0.1	\N
+39	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:11.996156+07	127.0.0.1	\N
+40	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:19.096263+07	127.0.0.1	\N
+41	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:26.725252+07	127.0.0.1	\N
+42	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:35.513089+07	127.0.0.1	\N
+43	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:50.363745+07	127.0.0.1	\N
+44	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:37:57.38625+07	127.0.0.1	\N
+45	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:38:08.185798+07	127.0.0.1	\N
+46	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:38:16.509397+07	127.0.0.1	\N
+47	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/create/	POST	200	2020-03-05 08:38:23.883278+07	127.0.0.1	\N
+48	1	hoavt@ominext.com	http://127.0.0.1:8000/v1/mail-magazine/	GET	200	2020-03-05 08:38:32.354634+07	127.0.0.1	\N
+\.
+
+
+--
+-- Data for Name: answer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.answer (id, count_assessment, point, created_at, updated_at, company_id, question_id, user_id, workshop_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add content type	4	add_contenttype
+14	Can change content type	4	change_contenttype
+15	Can delete content type	4	delete_contenttype
+16	Can view content type	4	view_contenttype
+17	Can add session	5	add_session
+18	Can change session	5	change_session
+19	Can delete session	5	delete_session
+20	Can view session	5	view_session
+21	Can add user	6	add_user
+22	Can change user	6	change_user
+23	Can delete user	6	delete_user
+24	Can view user	6	view_user
+25	Can add user profile	7	add_userprofile
+26	Can change user profile	7	change_userprofile
+27	Can delete user profile	7	delete_userprofile
+28	Can view user profile	7	view_userprofile
+29	Can add questions	8	add_questions
+30	Can change questions	8	change_questions
+31	Can delete questions	8	delete_questions
+32	Can view questions	8	view_questions
+33	Can add company	9	add_company
+34	Can change company	9	change_company
+35	Can delete company	9	delete_company
+36	Can view company	9	view_company
+37	Can add workshop	10	add_workshop
+38	Can change workshop	10	change_workshop
+39	Can delete workshop	10	delete_workshop
+40	Can view workshop	10	view_workshop
+41	Can add user workshop	11	add_userworkshop
+42	Can change user workshop	11	change_userworkshop
+43	Can delete user workshop	11	delete_userworkshop
+44	Can view user workshop	11	view_userworkshop
+45	Can add answer	12	add_answer
+46	Can change answer	12	change_answer
+47	Can delete answer	12	delete_answer
+48	Can view answer	12	view_answer
+49	Can add result	13	add_result
+50	Can change result	13	change_result
+51	Can delete result	13	delete_result
+52	Can view result	13	view_result
+53	Can add csaplus24 average	14	add_csaplus24average
+54	Can change csaplus24 average	14	change_csaplus24average
+55	Can delete csaplus24 average	14	delete_csaplus24average
+56	Can view csaplus24 average	14	view_csaplus24average
+57	Can add csaplus24 coefficient	15	add_csaplus24coefficient
+58	Can change csaplus24 coefficient	15	change_csaplus24coefficient
+59	Can delete csaplus24 coefficient	15	delete_csaplus24coefficient
+60	Can view csaplus24 coefficient	15	view_csaplus24coefficient
+61	Can add department	16	add_department
+62	Can change department	16	change_department
+63	Can delete department	16	delete_department
+64	Can view department	16	view_department
+65	Can add mail magazine	17	add_mailmagazine
+66	Can change mail magazine	17	change_mailmagazine
+67	Can delete mail magazine	17	delete_mailmagazine
+68	Can view mail magazine	17	view_mailmagazine
+69	Can add meanvalue stddeviation	18	add_meanvaluestddeviation
+70	Can change meanvalue stddeviation	18	change_meanvaluestddeviation
+71	Can delete meanvalue stddeviation	18	delete_meanvaluestddeviation
+72	Can view meanvalue stddeviation	18	view_meanvaluestddeviation
+73	Can add email post content	19	add_emailpostcontent
+74	Can change email post content	19	change_emailpostcontent
+75	Can delete email post content	19	delete_emailpostcontent
+76	Can view email post content	19	view_emailpostcontent
+77	Can add Password Reset Token	20	add_resetpasswordtoken
+78	Can change Password Reset Token	20	change_resetpasswordtoken
+79	Can delete Password Reset Token	20	delete_resetpasswordtoken
+80	Can view Password Reset Token	20	view_resetpasswordtoken
+81	Can add application	21	add_application
+82	Can change application	21	change_application
+83	Can delete application	21	delete_application
+84	Can view application	21	view_application
+85	Can add access token	22	add_accesstoken
+86	Can change access token	22	change_accesstoken
+87	Can delete access token	22	delete_accesstoken
+88	Can view access token	22	view_accesstoken
+89	Can add grant	23	add_grant
+90	Can change grant	23	change_grant
+91	Can delete grant	23	delete_grant
+92	Can view grant	23	view_grant
+93	Can add refresh token	24	add_refreshtoken
+94	Can change refresh token	24	change_refreshtoken
+95	Can delete refresh token	24	delete_refreshtoken
+96	Can view refresh token	24	view_refreshtoken
+97	Can add cors model	25	add_corsmodel
+98	Can change cors model	25	change_corsmodel
+99	Can delete cors model	25	delete_corsmodel
+100	Can view cors model	25	view_corsmodel
+101	Can add activity log	26	add_activitylog
+102	Can change activity log	26	change_activitylog
+103	Can delete activity log	26	delete_activitylog
+104	Can view activity log	26	view_activitylog
+\.
+
+
+--
+-- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.company (id, name, address, total_staff, created_at, updated_at) FROM stdin;
+1	Coatching	Japan	1000	2020-03-04 17:48:16.136+07	2020-03-04 17:48:17.535+07
+\.
+
+
+--
+-- Data for Name: corsheaders_corsmodel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.corsheaders_corsmodel (id, cors) FROM stdin;
+\.
+
+
+--
+-- Data for Name: csaplus24_average; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.csaplus24_average (id_id, name, category, type, factor, created_at, updated_at) FROM stdin;
+1	私は相手の変化や成果に気付いてそれを伝えている	A.日常の会話	個別対応	4.965023847	2020-03-04 18:03:29.418287+07	2020-03-04 18:03:29.418301+07
+2	私は相手の考え方や価値観を理解している	A.日常の会話	個別対応	4.83227345	2020-03-04 18:03:29.423004+07	2020-03-04 18:03:29.423017+07
+3	私の話し方、ほめ方などは、相手の性格や特徴に合ったものである	A.日常の会話	個別対応	4.5	2020-03-04 18:03:29.426963+07	2020-03-04 18:03:29.426979+07
+4	私は相手の強みや得意分野を引き出し、伸ばしている	A.日常の会話	個別対応	4.382352941	2020-03-04 18:03:29.431071+07	2020-03-04 18:03:29.431085+07
+5	私は相手との話をあいまいに終わらせず、結論を出している	B.対話力	前進	4.741653418	2020-03-04 18:03:29.434272+07	2020-03-04 18:03:29.434284+07
+6	私は話題が発散しすぎず、目的を持って相手との会話を進めている	B.対話力	前進	4.628775835	2020-03-04 18:03:29.43971+07	2020-03-04 18:03:29.439722+07
+7	私は相手の話を途中でさえぎったり、否定することなく最後まで聞いている	B.対話力	傾聴	4.410174881	2020-03-04 18:03:29.447072+07	2020-03-04 18:03:29.447084+07
+8	私は結論を急がせたり先取りすることなく、落ち着いて相手に話をさせている	B.対話力	傾聴	4.259936407	2020-03-04 18:03:29.45707+07	2020-03-04 18:03:29.457085+07
+9	私は相手にとって話しやすい・相談しやすい雰囲気である	A.日常の会話	個別対応	4.513513514	2020-03-04 18:03:29.466075+07	2020-03-04 18:03:29.466086+07
+10	私は相手に対してうなずき、あいづち、あいのてなど、反応をまじえながら応じている	A.日常の会話	個別対応	5.284578696	2020-03-04 18:03:29.473102+07	2020-03-04 18:03:29.473119+07
+11	私は相手と定期的に話す場を設けている	A.日常の会話	継続	4.351351351	2020-03-04 18:03:29.479534+07	2020-03-04 18:03:29.479546+07
+12	私は相手の目標の進捗についてその人と話をしている	A.日常の会話	継続	4.43799682	2020-03-04 18:03:29.482879+07	2020-03-04 18:03:29.482889+07
+13	私は相手からのメールや電話の連絡にタイムリーに返答している	B.対話力	前進	5.138314785	2020-03-04 18:03:29.486265+07	2020-03-04 18:03:29.486276+07
+14	私は相手にねぎらいの気持ちを伝えている	A.日常の会話	個別対応	5.087440382	2020-03-04 18:03:29.490549+07	2020-03-04 18:03:29.490561+07
+15	私は自分の考えを伝える前に、まず相手の考えを尋ねている	B.対話力	質問	4.222575517	2020-03-04 18:03:29.49395+07	2020-03-04 18:03:29.493963+07
+16	私は相手に気付かせたり、自発的に考えさせたりする質問をしている	B.対話力	質問	4.13354531	2020-03-04 18:03:29.49727+07	2020-03-04 18:03:29.497282+07
+17	私から相手への提案や要望、主張の内容は、明確でわかりやすい	B.対話力	前進	4.477742448	2020-03-04 18:03:29.500766+07	2020-03-04 18:03:29.500778+07
+18	私は相手をやる気にさせる提案や要望をしている	A.日常の会話	個別対応	4.331478537	2020-03-04 18:03:29.505021+07	2020-03-04 18:03:29.505039+07
+19	私は自分の行動についてのフィードバックを自ら求めている	A.日常の会話	継続	3.840222576	2020-03-04 18:03:29.508149+07	2020-03-04 18:03:29.508161+07
+20	私は相手が目標に対して順調に進んでいるか、フィードバックをしている	A.日常の会話	継続	4.240858506	2020-03-04 18:03:29.513197+07	2020-03-04 18:03:29.513211+07
+21	私の関わりが相手の目標達成を促進している	A.日常の会話	目的共有	4.441176471	2020-03-04 18:03:29.516538+07	2020-03-04 18:03:29.516548+07
+22	私は相手の成功や成長を支援している	A.日常の会話	目的共有	4.974562798	2020-03-04 18:03:29.519689+07	2020-03-04 18:03:29.519701+07
+23	私と相手は組織全体の方向性を共有している	A.日常の会話	目的共有	5.112877583	2020-03-04 18:03:29.523225+07	2020-03-04 18:03:29.523235+07
+24	私は相手の目指している目標を知っている	A.日常の会話	目的共有	4.821144674	2020-03-04 18:03:29.526905+07	2020-03-04 18:03:29.526917+07
+\.
+
+
+--
+-- Data for Name: csaplus24_coefficient; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.csaplus24_coefficient (id_id, name, category, type, factor, created_at, updated_at) FROM stdin;
+1	私は相手の変化や成果に気付いてそれを伝えている	A.日常の関わり	個別対応	0.124107367	2020-03-04 18:03:34.335207+07	2020-03-04 18:03:34.335219+07
+2	私は相手の考え方や価値観を理解している	A.日常の関わり	個別対応	0.126239357	2020-03-04 18:03:34.338482+07	2020-03-04 18:03:34.338498+07
+3	私の話し方、ほめ方などは、相手の性格や特徴に合ったものである	A.日常の関わり	個別対応	0.167627913	2020-03-04 18:03:34.342964+07	2020-03-04 18:03:34.342982+07
+4	私は相手の強みや得意分野を引き出し、伸ばしている	A.日常の関わり	個別対応	0.088482051	2020-03-04 18:03:34.347541+07	2020-03-04 18:03:34.347556+07
+5	私は相手との話をあいまいに終わらせず、結論を出している	B.対話力	前進	0.313935127	2020-03-04 18:03:34.351231+07	2020-03-04 18:03:34.351242+07
+6	私は話題が発散しすぎず、目的を持って相手との会話を進めている	B.対話力	前進	0.271481982	2020-03-04 18:03:34.354232+07	2020-03-04 18:03:34.354243+07
+7	私は相手の話を途中でさえぎったり、否定することなく最後まで聞いている	B.対話力	傾聴	0.506569056	2020-03-04 18:03:34.359508+07	2020-03-04 18:03:34.359526+07
+8	私は結論を急がせたり先取りすることなく、落ち着いて相手に話をさせている	B.対話力	傾聴	0.493430944	2020-03-04 18:03:34.363503+07	2020-03-04 18:03:34.363518+07
+9	私は相手にとって話しやすい・相談しやすい雰囲気である	A.日常の関わり	個別対応	0.148119537	2020-03-04 18:03:34.366845+07	2020-03-04 18:03:34.366855+07
+10	私は相手に対してうなずき、あいづち、あいのてなど、反応をまじえながら応じている	A.日常の関わり	個別対応	0.130056042	2020-03-04 18:03:34.369999+07	2020-03-04 18:03:34.370008+07
+11	私は相手と定期的に話す場を設けている	A.日常の関わり	継続	0.30606263	2020-03-04 18:03:34.374729+07	2020-03-04 18:03:34.374751+07
+12	私は相手の目標の進捗についてその人と話をしている	A.日常の関わり	継続	0.353121828	2020-03-04 18:03:34.379084+07	2020-03-04 18:03:34.379097+07
+13	私は相手からのメールや電話の連絡にタイムリーに返答している	B.対話力	前進	0.152027875	2020-03-04 18:03:34.3824+07	2020-03-04 18:03:34.38241+07
+14	私は相手にねぎらいの気持ちを伝えている	A.日常の関わり	個別対応	0.13569819	2020-03-04 18:03:34.385325+07	2020-03-04 18:03:34.385338+07
+15	私は自分の考えを伝える前に、まず相手の考えを尋ねている	B.対話力	質問	0.41515017	2020-03-04 18:03:34.389271+07	2020-03-04 18:03:34.389286+07
+16	私は相手に気付かせたり、自発的に考えさせたりする質問をしている	B.対話力	質問	0.58484983	2020-03-04 18:03:34.394487+07	2020-03-04 18:03:34.394499+07
+17	私から相手への提案や要望、主張の内容は、明確でわかりやすい	B.対話力	前進	0.262555015	2020-03-04 18:03:34.398291+07	2020-03-04 18:03:34.398304+07
+18	私は相手をやる気にさせる提案や要望をしている	A.日常の関わり	個別対応	0.079669543	2020-03-04 18:03:34.401259+07	2020-03-04 18:03:34.401271+07
+19	私は自分の行動についてのフィードバックを自ら求めている	A.日常の関わり	継続	0.098560318	2020-03-04 18:03:34.404485+07	2020-03-04 18:03:34.404499+07
+20	私は相手が目標に対して順調に進んでいるか、フィードバックをしている	A.日常の関わり	継続	0.242255224	2020-03-04 18:03:34.409342+07	2020-03-04 18:03:34.409359+07
+21	私の関わりが相手の目標達成を促進している	A.日常の関わり	目的共有	0.18641123	2020-03-04 18:03:34.412661+07	2020-03-04 18:03:34.412672+07
+22	私は相手の成功や成長を支援している	A.日常の関わり	目的共有	0.223558063	2020-03-04 18:03:34.415604+07	2020-03-04 18:03:34.415614+07
+23	私と相手は組織全体の方向性を共有している	A.日常の関わり	目的共有	0.32108533	2020-03-04 18:03:34.41877+07	2020-03-04 18:03:34.418783+07
+24	私は相手の目指している目標を知っている	A.日常の関わり	目的共有	0.268945377	2020-03-04 18:03:34.422449+07	2020-03-04 18:03:34.422465+07
+\.
+
+
+--
+-- Data for Name: department; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.department (id, name, created_at, updated_at) FROM stdin;
+1	Admin	2020-03-04 17:48:35.117+07	2020-03-04 17:48:36.641+07
+2	Director	2020-03-04 17:48:45.929+07	2020-03-04 17:48:47.513+07
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	contenttypes	contenttype
+5	sessions	session
+6	Users	user
+7	Users	userprofile
+8	Question	questions
+9	Company	company
+10	Workshop	workshop
+11	Workshop	userworkshop
+12	Answer	answer
+13	Answer	result
+14	Csaplus24	csaplus24average
+15	Csaplus24	csaplus24coefficient
+16	Department	department
+17	MailMagazine	mailmagazine
+18	MeanvalueStddeviation	meanvaluestddeviation
+19	EmailPostLearningContent	emailpostcontent
+20	django_rest_passwordreset	resetpasswordtoken
+21	oauth2_provider	application
+22	oauth2_provider	accesstoken
+23	oauth2_provider	grant
+24	oauth2_provider	refreshtoken
+25	corsheaders	corsmodel
+26	activity_log	activitylog
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2020-03-04 17:44:57.776747+07
+2	contenttypes	0002_remove_content_type_name	2020-03-04 17:44:57.794724+07
+3	auth	0001_initial	2020-03-04 17:44:57.829019+07
+4	auth	0002_alter_permission_name_max_length	2020-03-04 17:44:57.897591+07
+5	auth	0003_alter_user_email_max_length	2020-03-04 17:44:57.916734+07
+6	auth	0004_alter_user_username_opts	2020-03-04 17:44:57.932509+07
+7	auth	0005_alter_user_last_login_null	2020-03-04 17:44:57.941576+07
+8	auth	0006_require_contenttypes_0002	2020-03-04 17:44:57.944017+07
+9	auth	0007_alter_validators_add_error_messages	2020-03-04 17:44:57.953491+07
+10	auth	0008_alter_user_username_max_length	2020-03-04 17:44:57.959819+07
+11	auth	0009_alter_user_last_name_max_length	2020-03-04 17:44:57.965108+07
+12	auth	0010_alter_group_name_max_length	2020-03-04 17:44:57.970453+07
+13	auth	0011_update_proxy_permissions	2020-03-04 17:44:57.975598+07
+14	Department	0001_initial	2020-03-04 17:44:57.980637+07
+15	Company	0001_initial	2020-03-04 17:44:58.008242+07
+16	Users	0001_initial	2020-03-04 17:44:58.085175+07
+17	Workshop	0001_initial	2020-03-04 17:44:58.227854+07
+18	Question	0001_initial	2020-03-04 17:44:58.282372+07
+19	Answer	0001_initial	2020-03-04 17:44:58.319376+07
+20	Answer	0002_auto_20200304_0926	2020-03-04 17:44:58.437549+07
+21	Csaplus24	0001_initial	2020-03-04 17:44:58.583196+07
+22	EmailPostLearningContent	0001_initial	2020-03-04 17:44:58.594066+07
+23	EmailPostLearningContent	0002_emailpostcontent_user	2020-03-04 17:44:58.614867+07
+24	MailMagazine	0001_initial	2020-03-04 17:44:58.638406+07
+25	MeanvalueStddeviation	0001_initial	2020-03-04 17:44:58.660088+07
+26	activity_log	0001_initial	2020-03-04 17:44:58.688121+07
+27	activity_log	0002_activitylog_ip_address	2020-03-04 17:44:58.699661+07
+28	activity_log	0003_activitylog_extra_data	2020-03-04 17:44:58.707209+07
+29	activity_log	0004_auto_20170309_0929	2020-03-04 17:44:58.743145+07
+30	activity_log	0005_auto_20170313_0755	2020-03-04 17:44:58.774094+07
+31	activity_log	0006_auto_20190816_1641	2020-03-04 17:44:58.818407+07
+32	admin	0001_initial	2020-03-04 17:44:58.863536+07
+33	admin	0002_logentry_remove_auto_add	2020-03-04 17:44:58.91715+07
+34	admin	0003_logentry_add_action_flag_choices	2020-03-04 17:44:58.93441+07
+35	corsheaders	0001_initial	2020-03-04 17:44:58.940915+07
+36	django_rest_passwordreset	0001_initial	2020-03-04 17:44:59.00038+07
+37	django_rest_passwordreset	0002_pk_migration	2020-03-04 17:44:59.161112+07
+38	oauth2_provider	0001_initial	2020-03-04 17:44:59.330489+07
+39	oauth2_provider	0002_08_updates	2020-03-04 17:44:59.66173+07
+40	oauth2_provider	0003_auto_20160316_1503	2020-03-04 17:44:59.683463+07
+41	oauth2_provider	0004_auto_20160525_1623	2020-03-04 17:44:59.794089+07
+42	oauth2_provider	0005_auto_20170514_1141	2020-03-04 17:45:01.181698+07
+43	oauth2_provider	0006_auto_20171214_2232	2020-03-04 17:45:01.311043+07
+44	sessions	0001_initial	2020-03-04 17:45:01.336597+07
+\.
+
+
+--
+-- Data for Name: django_rest_passwordreset_resetpasswordtoken; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_rest_passwordreset_resetpasswordtoken (created_at, key, ip_address, user_agent, user_id, id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+e1kx9j4uhy8ytihjbsewaxppo7vkjzfy	YTZjMWIxZmVlMTIxN2NjNmNmMjVmNmExYWFjZGViZjlkOTVjYWFiNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5MjI0Yjc3NWMzZjQ5NTUyYjc2OTcwZjU2MzkyY2ZmNzBlYWRkZWQ4In0=	2020-03-18 17:50:33.507162+07
+\.
+
+
+--
+-- Data for Name: email_post_content; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.email_post_content (id, count_send_email, created_at, updated_at, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: mail_magazine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.mail_magazine (id, vol_version, title, content, status, created_at, updated_at) FROM stdin;
+1	1	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips01.html	t	2020-03-05 08:36:14.693778+07	2020-03-05 08:36:14.694976+07
+2	2	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips02.html	t	2020-03-05 08:36:32.977297+07	2020-03-05 08:36:32.983444+07
+3	3	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips03.html	t	2020-03-05 08:36:46.939308+07	2020-03-05 08:36:46.940443+07
+4	4	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips04.html	t	2020-03-05 08:36:54.731344+07	2020-03-05 08:36:54.732995+07
+5	5	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips05.html	t	2020-03-05 08:37:02.777926+07	2020-03-05 08:37:02.779093+07
+6	6	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips06.html	t	2020-03-05 08:37:11.982608+07	2020-03-05 08:37:11.985804+07
+7	7	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips07.html	t	2020-03-05 08:37:19.091203+07	2020-03-05 08:37:19.092414+07
+8	8	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips08.html	t	2020-03-05 08:37:26.708012+07	2020-03-05 08:37:26.714634+07
+9	9	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips09.html	t	2020-03-05 08:37:35.501023+07	2020-03-05 08:37:35.503125+07
+10	10	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips10.html	t	2020-03-05 08:37:50.358085+07	2020-03-05 08:37:50.359659+07
+11	11	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips11.html	t	2020-03-05 08:37:57.381462+07	2020-03-05 08:37:57.382876+07
+12	12	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips12.html	t	2020-03-05 08:38:08.181177+07	2020-03-05 08:38:08.182484+07
+13	13	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips13.html	t	2020-03-05 08:38:16.501441+07	2020-03-05 08:38:16.505782+07
+14	14	TIPS	https://static-coacha-three-minutes-coaching-client.s3-ap-northeast-1.amazonaws.com/tips14.html	t	2020-03-05 08:38:23.878736+07	2020-03-05 08:38:23.87982+07
+\.
+
+
+--
+-- Data for Name: meanvalue_stddeviation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.meanvalue_stddeviation (id, type, average_value, standard_deviation, created_at, updated_at) FROM stdin;
+1	継続	4.30480327376977012	1.07330213526730001	2020-03-04 17:54:00.085329+07	2020-03-05 08:35:35.878341+07
+2	目的共有	4.87828334995903035	0.857102602862739982	2020-03-04 17:54:00.087577+07	2020-03-05 08:35:35.880562+07
+3	個別対応	4.75957860250797982	0.742966282232823017	2020-03-04 17:54:00.089648+07	2020-03-05 08:35:35.882937+07
+4	傾聴	4.33604256879656003	1.26571600519767991	2020-03-04 17:54:00.091783+07	2020-03-05 08:35:35.884929+07
+5	質問	4.17050621541989042	1.04949989915463004	2020-03-04 17:54:00.093757+07	2020-03-05 08:35:35.88646+07
+6	前進	4.7020216242383901	0.888297353895693975	2020-03-04 17:54:00.095526+07	2020-03-05 08:35:35.887721+07
+7	全体	4.52520593911526969	0.690956009974254992	2020-03-04 17:54:00.098207+07	2020-03-05 08:35:35.889031+07
+\.
+
+
+--
+-- Data for Name: oauth2_provider_accesstoken; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oauth2_provider_accesstoken (id, token, expires, scope, application_id, user_id, created, updated, source_refresh_token_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_application; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oauth2_provider_application (id, client_id, redirect_uris, client_type, authorization_grant_type, client_secret, name, user_id, skip_authorization, created, updated) FROM stdin;
+1	LJUiw5yOp0eEfs8l1EDdHbAaozRha4odpC3cCZde		confidential	password	oeBsob03pSzaezb9WK4PvFeV97Jxek573BR5ctUCkq2DBGbTvrAB6pgJkRFgQ2Xl8MvqlkQolbcG0XFiRGVQFP1Yw0rIcE8TqZBkc29GiOg0E9Afb7JaPTpjtLVkovjt	PRODUCTION	1	f	2020-03-04 17:50:45.331486+07	2020-03-04 17:50:45.331507+07
+\.
+
+
+--
+-- Data for Name: oauth2_provider_grant; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oauth2_provider_grant (id, code, expires, redirect_uri, scope, application_id, user_id, created, updated) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth2_provider_refreshtoken; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.oauth2_provider_refreshtoken (id, token, access_token_id, application_id, user_id, created, updated, revoked) FROM stdin;
+\.
+
+
+--
+-- Data for Name: profile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.profile (id, employee_id, first_furigana, last_furigana, language, birthday, sex, "position", company_date_joined, authority, is_send_email, company_id, department_id, user_id) FROM stdin;
+1	1	\N	\N	\N	2020-03-04	\N	\N	2020-03-04	\N	f	1	1	1
+2	2	\N	\N	\N	2020-03-04	\N	\N	2020-03-04	\N	t	1	2	2
+3	3	\N	\N	\N	2020-03-04	\N	\N	2020-03-04	\N	t	1	2	3
+\.
+
+
+--
+-- Data for Name: questions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.questions (id, name, category, type, factor, created_at, updated_at) FROM stdin;
+1	私は相手の変化や成果に気付いてそれを伝えている	A.日常の関わり	個別対応	0.124107367325151	2020-03-04 18:03:16.2532+07	2020-03-04 18:03:16.25321+07
+2	私は相手の考え方や価値観を理解している	A.日常の関わり	個別対応	0.126239356755916993	2020-03-04 18:03:16.255379+07	2020-03-04 18:03:16.255395+07
+3	私の話し方、ほめ方などは、相手の性格や特徴に合ったものである	A.日常の関わり	個別対応	0.167627912811276009	2020-03-04 18:03:16.257888+07	2020-03-04 18:03:16.257904+07
+4	私は相手の強みや得意分野を引き出し、伸ばしている	A.日常の関わり	個別対応	0.0884820514154650017	2020-03-04 18:03:16.259939+07	2020-03-04 18:03:16.259951+07
+5	私は相手との話をあいまいに終わらせず、結論を出している	B.対話力	前進	0.313935126945590004	2020-03-04 18:03:16.26176+07	2020-03-04 18:03:16.261771+07
+6	私は話題が発散しすぎず、目的を持って相手との会話を進めている	B.対話力	前進	0.271481982151182022	2020-03-04 18:03:16.263547+07	2020-03-04 18:03:16.263557+07
+7	私は相手の話を途中でさえぎったり、否定することなく最後まで聞いている	B.対話力	傾聴	0.506569055799275025	2020-03-04 18:03:16.265169+07	2020-03-04 18:03:16.265179+07
+8	私は結論を急がせたり先取りすることなく、落ち着いて相手に話をさせている	B.対話力	傾聴	0.493430944200724975	2020-03-04 18:03:16.266785+07	2020-03-04 18:03:16.266795+07
+9	私は相手にとって話しやすい・相談しやすい雰囲気である	A.日常の関わり	個別対応	0.148119536963905007	2020-03-04 18:03:16.268598+07	2020-03-04 18:03:16.268611+07
+10	私は相手に対してうなずき、あいづち、あいのてなど、反応をまじえながら応じている	A.日常の関わり	個別対応	0.130056041635844	2020-03-04 18:03:16.270481+07	2020-03-04 18:03:16.270491+07
+11	私は相手と定期的に話す場を設けている	A.日常の関わり	継続	0.306062630151458015	2020-03-04 18:03:16.272944+07	2020-03-04 18:03:16.272964+07
+12	私は相手の目標の進捗についてその人と話をしている	A.日常の関わり	継続	0.353121827501903018	2020-03-04 18:03:16.27569+07	2020-03-04 18:03:16.275702+07
+13	私は相手からのメールや電話の連絡にタイムリーに返答している	B.対話力	前進	0.152027875496064002	2020-03-04 18:03:16.27798+07	2020-03-04 18:03:16.277991+07
+14	私は相手にねぎらいの気持ちを伝えている	A.日常の関わり	個別対応	0.135698190060969004	2020-03-04 18:03:16.279825+07	2020-03-04 18:03:16.279835+07
+15	私は自分の考えを伝える前に、まず相手の考えを尋ねている	B.対話力	質問	0.415150169627052978	2020-03-04 18:03:16.281459+07	2020-03-04 18:03:16.281469+07
+16	私は相手に気付かせたり、自発的に考えさせたりする質問をしている	B.対話力	質問	0.584849830372947022	2020-03-04 18:03:16.282997+07	2020-03-04 18:03:16.283007+07
+17	私から相手への提案や要望、主張の内容は、明確でわかりやすい	B.対話力	前進	0.262555015407164027	2020-03-04 18:03:16.284596+07	2020-03-04 18:03:16.284608+07
+18	私は相手をやる気にさせる提案や要望をしている	A.日常の関わり	個別対応	0.0796695430314730002	2020-03-04 18:03:16.286435+07	2020-03-04 18:03:16.286444+07
+19	私は自分の行動についてのフィードバックを自ら求めている	A.日常の関わり	継続	0.0985603182721239979	2020-03-04 18:03:16.288292+07	2020-03-04 18:03:16.288307+07
+20	私は相手が目標に対して順調に進んでいるか、フィードバックをしている	A.日常の関わり	継続	0.242255224074514997	2020-03-04 18:03:16.290897+07	2020-03-04 18:03:16.290915+07
+21	私の関わりが相手の目標達成を促進している	A.日常の関わり	目的共有	0.186411229874036993	2020-03-04 18:03:16.293261+07	2020-03-04 18:03:16.293273+07
+22	私は相手の成功や成長を支援している	A.日常の関わり	目的共有	0.223558063123881989	2020-03-04 18:03:16.295398+07	2020-03-04 18:03:16.295408+07
+23	私と相手は組織全体の方向性を共有している	A.日常の関わり	目的共有	0.321085329551375975	2020-03-04 18:03:16.297068+07	2020-03-04 18:03:16.297079+07
+24	私は相手の目指している目標を知っている	A.日常の関わり	目的共有	0.268945377450704015	2020-03-04 18:03:16.29877+07	2020-03-04 18:03:16.29878+07
+\.
+
+
+--
+-- Data for Name: result; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.result (id, count_assessment, score_listen, score_ask_questions, score_advance, score_retention, score_sharing_purpose, score_personal_reciprocal, created_at, updated_at, total_average_score, total_normdist_score, company_id, user_id, workshop_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: user_workshop; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.user_workshop (id, completed_assessment, created_at, updated_at, company_id, user_id, workshop_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined, last_activity, is_user_admin, cronjob_mail_magazine) FROM stdin;
+2	pbkdf2_sha256$150000$o6EPeJ8CgZzz$Pr6I81q5edlyBdxsf5fLfVFD/DSm3SevO6iTrAAV9U8=	\N	t	masamitsu.watanabe@ensemble.vn	masamitsu	watanabe	masamitsu.watanabe@ensemble.vn	t	t	2020-03-04 17:46:28.005281+07	2020-03-04 17:46:28.005288+07	f	
+3	pbkdf2_sha256$150000$u8dCPEG6VsHV$uN1nLozDG5Uoa/xH0qP642QfMMfXnXhpDBpgn9JMDxg=	\N	t	yasuko.kokubun@coacha.com	yasuko	kokubun	yasuko.kokubun@coacha.com	t	t	2020-03-04 17:46:43.389243+07	2020-03-04 17:46:43.38925+07	f	
+1	pbkdf2_sha256$150000$VauvvCst3K3Y$CizUrKHeO0Uk12pNG2o+Pd67gO/6Q6oZjp9L+rHGjgw=	2020-03-04 17:50:33.50508+07	f	hoavt@ominext.com			hoavt@ominext.com	t	t	2020-03-04 17:46:01.491202+07	2020-03-04 17:53:26.82385+07	f	
+\.
+
+
+--
+-- Data for Name: users_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: users_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: workshop; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.workshop (id, name, date_workshop, total_user_join, created_at, updated_at, company_id) FROM stdin;
+1	First Workshop	2020-03-04	10000	2020-03-04 17:52:18.819+07	2020-03-04 17:52:20.198+07	1
+\.
+
+
+--
+-- Name: activity_log_activitylog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.activity_log_activitylog_id_seq', 48, true);
+
+
+--
+-- Name: answer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.answer_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 104, true);
+
+
+--
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.company_id_seq', 1, false);
+
+
+--
+-- Name: corsheaders_corsmodel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.corsheaders_corsmodel_id_seq', 1, false);
+
+
+--
+-- Name: department_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.department_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 26, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 44, true);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.django_rest_passwordreset_resetpasswordtoken_id_seq', 1, false);
+
+
+--
+-- Name: email_post_content_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.email_post_content_id_seq', 1, false);
+
+
+--
+-- Name: mail_magazine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.mail_magazine_id_seq', 1, false);
+
+
+--
+-- Name: meanvalue_stddeviation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.meanvalue_stddeviation_id_seq', 7, true);
+
+
+--
+-- Name: oauth2_provider_accesstoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_accesstoken_id_seq', 3, true);
+
+
+--
+-- Name: oauth2_provider_application_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_application_id_seq', 1, true);
+
+
+--
+-- Name: oauth2_provider_grant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_grant_id_seq', 1, false);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.oauth2_provider_refreshtoken_id_seq', 3, true);
+
+
+--
+-- Name: profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.profile_id_seq', 1, false);
+
+
+--
+-- Name: questions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.questions_id_seq', 24, true);
+
+
+--
+-- Name: result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.result_id_seq', 1, false);
+
+
+--
+-- Name: user_workshop_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.user_workshop_id_seq', 1, false);
+
+
+--
+-- Name: users_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_groups_id_seq', 1, false);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 3, true);
+
+
+--
+-- Name: users_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: workshop_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.workshop_id_seq', 1, false);
+
+
+--
+-- Name: activity_log_activitylog activity_log_activitylog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.activity_log_activitylog
+    ADD CONSTRAINT activity_log_activitylog_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answer answer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answer answer_user_id_question_id_work_13559d1f_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_user_id_question_id_work_13559d1f_uniq UNIQUE (user_id, question_id, workshop_id, company_id, count_assessment);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company company_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.company
+    ADD CONSTRAINT company_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: corsheaders_corsmodel corsheaders_corsmodel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.corsheaders_corsmodel
+    ADD CONSTRAINT corsheaders_corsmodel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: csaplus24_average csaplus24_average_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.csaplus24_average
+    ADD CONSTRAINT csaplus24_average_pkey PRIMARY KEY (id_id);
+
+
+--
+-- Name: csaplus24_coefficient csaplus24_coefficient_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.csaplus24_coefficient
+    ADD CONSTRAINT csaplus24_coefficient_pkey PRIMARY KEY (id_id);
+
+
+--
+-- Name: department department_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.department
+    ADD CONSTRAINT department_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken django_rest_passwordreset_resetpasswordtoken_key_f1b65873_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_rest_passwordreset_resetpasswordtoken
+    ADD CONSTRAINT django_rest_passwordreset_resetpasswordtoken_key_f1b65873_uniq UNIQUE (key);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken django_rest_passwordreset_resetpasswordtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_rest_passwordreset_resetpasswordtoken
+    ADD CONSTRAINT django_rest_passwordreset_resetpasswordtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: email_post_content email_post_content_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.email_post_content
+    ADD CONSTRAINT email_post_content_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mail_magazine mail_magazine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.mail_magazine
+    ADD CONSTRAINT mail_magazine_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: meanvalue_stddeviation meanvalue_stddeviation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.meanvalue_stddeviation
+    ADD CONSTRAINT meanvalue_stddeviation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_source_refresh_token_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_source_refresh_token_id_key UNIQUE (source_refresh_token_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_token_8af090f8_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_token_8af090f8_uniq UNIQUE (token);
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_client_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_client_id_key UNIQUE (client_id);
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_code_49ab4ddf_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_code_49ab4ddf_uniq UNIQUE (code);
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_access_token_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_access_token_id_key UNIQUE (access_token_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_token_revoked_af8a5134_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_token_revoked_af8a5134_uniq UNIQUE (token, revoked);
+
+
+--
+-- Name: profile profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: profile profile_user_id_2aeb6f6b_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_user_id_2aeb6f6b_uniq UNIQUE (user_id);
+
+
+--
+-- Name: profile profile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: questions questions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.questions
+    ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: result result_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT result_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: result result_user_id_workshop_id_comp_c3ea3538_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT result_user_id_workshop_id_comp_c3ea3538_uniq UNIQUE (user_id, workshop_id, company_id, count_assessment);
+
+
+--
+-- Name: user_workshop user_workshop_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_workshop
+    ADD CONSTRAINT user_workshop_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_groups users_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_groups
+    ADD CONSTRAINT users_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_groups users_groups_user_id_group_id_fc7788e8_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_groups
+    ADD CONSTRAINT users_groups_user_id_group_id_fc7788e8_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_permissions users_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_user_permissions
+    ADD CONSTRAINT users_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_permissions users_user_permissions_user_id_permission_id_3b86cbdf_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_user_permissions
+    ADD CONSTRAINT users_user_permissions_user_id_permission_id_3b86cbdf_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- Name: workshop workshop_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.workshop
+    ADD CONSTRAINT workshop_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: activity_log_activitylog_datetime_029c3054; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_datetime_029c3054 ON public.activity_log_activitylog USING btree (datetime);
+
+
+--
+-- Name: activity_log_activitylog_ip_address_d1145916; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_ip_address_d1145916 ON public.activity_log_activitylog USING btree (ip_address);
+
+
+--
+-- Name: activity_log_activitylog_request_method_88c4a581; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_request_method_88c4a581 ON public.activity_log_activitylog USING btree (request_method);
+
+
+--
+-- Name: activity_log_activitylog_request_method_88c4a581_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_request_method_88c4a581_like ON public.activity_log_activitylog USING btree (request_method varchar_pattern_ops);
+
+
+--
+-- Name: activity_log_activitylog_response_code_74b98f9b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_response_code_74b98f9b ON public.activity_log_activitylog USING btree (response_code);
+
+
+--
+-- Name: activity_log_activitylog_response_code_74b98f9b_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX activity_log_activitylog_response_code_74b98f9b_like ON public.activity_log_activitylog USING btree (response_code varchar_pattern_ops);
+
+
+--
+-- Name: answer_company_id_1772cbec; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX answer_company_id_1772cbec ON public.answer USING btree (company_id);
+
+
+--
+-- Name: answer_question_id_523c1648; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX answer_question_id_523c1648 ON public.answer USING btree (question_id);
+
+
+--
+-- Name: answer_user_id_5d3bcab5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX answer_user_id_5d3bcab5 ON public.answer USING btree (user_id);
+
+
+--
+-- Name: answer_workshop_id_b5479658; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX answer_workshop_id_b5479658 ON public.answer USING btree (workshop_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken_key_f1b65873_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_rest_passwordreset_resetpasswordtoken_key_f1b65873_like ON public.django_rest_passwordreset_resetpasswordtoken USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken_user_id_e8015b11; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_rest_passwordreset_resetpasswordtoken_user_id_e8015b11 ON public.django_rest_passwordreset_resetpasswordtoken USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: email_post_content_user_id_c2b66ba3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX email_post_content_user_id_c2b66ba3 ON public.email_post_content USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken_application_id_b22886e1; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_accesstoken_application_id_b22886e1 ON public.oauth2_provider_accesstoken USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_accesstoken_token_8af090f8_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_accesstoken_token_8af090f8_like ON public.oauth2_provider_accesstoken USING btree (token varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_accesstoken_user_id_6e4c9a65; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_accesstoken_user_id_6e4c9a65 ON public.oauth2_provider_accesstoken USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_application_client_id_03f0cc84_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_application_client_id_03f0cc84_like ON public.oauth2_provider_application USING btree (client_id varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_application_client_secret_53133678; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_application_client_secret_53133678 ON public.oauth2_provider_application USING btree (client_secret);
+
+
+--
+-- Name: oauth2_provider_application_client_secret_53133678_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_application_client_secret_53133678_like ON public.oauth2_provider_application USING btree (client_secret varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_application_user_id_79829054; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_application_user_id_79829054 ON public.oauth2_provider_application USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_grant_application_id_81923564; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_grant_application_id_81923564 ON public.oauth2_provider_grant USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_grant_code_49ab4ddf_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_grant_code_49ab4ddf_like ON public.oauth2_provider_grant USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: oauth2_provider_grant_user_id_e8f62af8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_grant_user_id_e8f62af8 ON public.oauth2_provider_grant USING btree (user_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_application_id_2d1c311b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_refreshtoken_application_id_2d1c311b ON public.oauth2_provider_refreshtoken USING btree (application_id);
+
+
+--
+-- Name: oauth2_provider_refreshtoken_user_id_da837fce; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX oauth2_provider_refreshtoken_user_id_da837fce ON public.oauth2_provider_refreshtoken USING btree (user_id);
+
+
+--
+-- Name: profile_company_id_cbe7110b; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX profile_company_id_cbe7110b ON public.profile USING btree (company_id);
+
+
+--
+-- Name: profile_department_id_b7b75a74; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX profile_department_id_b7b75a74 ON public.profile USING btree (department_id);
+
+
+--
+-- Name: result_company_id_f182b5f3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX result_company_id_f182b5f3 ON public.result USING btree (company_id);
+
+
+--
+-- Name: result_user_id_e5f79d30; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX result_user_id_e5f79d30 ON public.result USING btree (user_id);
+
+
+--
+-- Name: result_workshop_id_482c87d1; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX result_workshop_id_482c87d1 ON public.result USING btree (workshop_id);
+
+
+--
+-- Name: user_workshop_company_id_55c60cfc; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_workshop_company_id_55c60cfc ON public.user_workshop USING btree (company_id);
+
+
+--
+-- Name: user_workshop_user_id_b26cf2c8; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_workshop_user_id_b26cf2c8 ON public.user_workshop USING btree (user_id);
+
+
+--
+-- Name: user_workshop_workshop_id_83205d68; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_workshop_workshop_id_83205d68 ON public.user_workshop USING btree (workshop_id);
+
+
+--
+-- Name: users_groups_group_id_2f3517aa; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_groups_group_id_2f3517aa ON public.users_groups USING btree (group_id);
+
+
+--
+-- Name: users_groups_user_id_f500bee5; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_groups_user_id_f500bee5 ON public.users_groups USING btree (user_id);
+
+
+--
+-- Name: users_user_permissions_permission_id_6d08dcd2; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_user_permissions_permission_id_6d08dcd2 ON public.users_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: users_user_permissions_user_id_92473840; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_user_permissions_user_id_92473840 ON public.users_user_permissions USING btree (user_id);
+
+
+--
+-- Name: users_username_e8658fc8_like; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX users_username_e8658fc8_like ON public.users USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: workshop_company_id_befbf843; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX workshop_company_id_befbf843 ON public.workshop USING btree (company_id);
+
+
+--
+-- Name: answer answer_company_id_1772cbec_fk_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_company_id_1772cbec_fk_company_id FOREIGN KEY (company_id) REFERENCES public.company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: answer answer_question_id_523c1648_fk_questions_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_question_id_523c1648_fk_questions_id FOREIGN KEY (question_id) REFERENCES public.questions(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: answer answer_user_id_5d3bcab5_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_user_id_5d3bcab5_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: answer answer_workshop_id_b5479658_fk_workshop_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.answer
+    ADD CONSTRAINT answer_workshop_id_b5479658_fk_workshop_id FOREIGN KEY (workshop_id) REFERENCES public.workshop(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: csaplus24_average csaplus24_average_id_id_9d672b5b_fk_questions_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.csaplus24_average
+    ADD CONSTRAINT csaplus24_average_id_id_9d672b5b_fk_questions_id FOREIGN KEY (id_id) REFERENCES public.questions(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: csaplus24_coefficient csaplus24_coefficient_id_id_8bb0d51c_fk_questions_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.csaplus24_coefficient
+    ADD CONSTRAINT csaplus24_coefficient_id_id_8bb0d51c_fk_questions_id FOREIGN KEY (id_id) REFERENCES public.questions(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_rest_passwordreset_resetpasswordtoken django_rest_password_user_id_e8015b11_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.django_rest_passwordreset_resetpasswordtoken
+    ADD CONSTRAINT django_rest_password_user_id_e8015b11_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: email_post_content email_post_content_user_id_c2b66ba3_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.email_post_content
+    ADD CONSTRAINT email_post_content_user_id_c2b66ba3_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_acce_source_refresh_token_e66fbc72_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_acce_source_refresh_token_e66fbc72_fk_oauth2_pr FOREIGN KEY (source_refresh_token_id) REFERENCES public.oauth2_provider_refreshtoken(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_application_id_b22886e1_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_application_id_b22886e1_fk FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_accesstoken oauth2_provider_accesstoken_user_id_6e4c9a65_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_accesstoken
+    ADD CONSTRAINT oauth2_provider_accesstoken_user_id_6e4c9a65_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_application oauth2_provider_application_user_id_79829054_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_application
+    ADD CONSTRAINT oauth2_provider_application_user_id_79829054_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_application_id_81923564_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_application_id_81923564_fk FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_grant oauth2_provider_grant_user_id_e8f62af8_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_grant
+    ADD CONSTRAINT oauth2_provider_grant_user_id_e8f62af8_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refr_access_token_id_775e84e8_fk_oauth2_pr; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refr_access_token_id_775e84e8_fk_oauth2_pr FOREIGN KEY (access_token_id) REFERENCES public.oauth2_provider_accesstoken(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_application_id_2d1c311b_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_application_id_2d1c311b_fk FOREIGN KEY (application_id) REFERENCES public.oauth2_provider_application(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: oauth2_provider_refreshtoken oauth2_provider_refreshtoken_user_id_da837fce_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.oauth2_provider_refreshtoken
+    ADD CONSTRAINT oauth2_provider_refreshtoken_user_id_da837fce_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: profile profile_company_id_cbe7110b_fk_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_company_id_cbe7110b_fk_company_id FOREIGN KEY (company_id) REFERENCES public.company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: profile profile_department_id_b7b75a74_fk_department_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_department_id_b7b75a74_fk_department_id FOREIGN KEY (department_id) REFERENCES public.department(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: profile profile_user_id_2aeb6f6b_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profile
+    ADD CONSTRAINT profile_user_id_2aeb6f6b_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: result result_company_id_f182b5f3_fk_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT result_company_id_f182b5f3_fk_company_id FOREIGN KEY (company_id) REFERENCES public.company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: result result_user_id_e5f79d30_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT result_user_id_e5f79d30_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: result result_workshop_id_482c87d1_fk_workshop_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.result
+    ADD CONSTRAINT result_workshop_id_482c87d1_fk_workshop_id FOREIGN KEY (workshop_id) REFERENCES public.workshop(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_workshop user_workshop_company_id_55c60cfc_fk_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_workshop
+    ADD CONSTRAINT user_workshop_company_id_55c60cfc_fk_company_id FOREIGN KEY (company_id) REFERENCES public.company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_workshop user_workshop_user_id_b26cf2c8_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_workshop
+    ADD CONSTRAINT user_workshop_user_id_b26cf2c8_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_workshop user_workshop_workshop_id_83205d68_fk_workshop_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_workshop
+    ADD CONSTRAINT user_workshop_workshop_id_83205d68_fk_workshop_id FOREIGN KEY (workshop_id) REFERENCES public.workshop(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_groups users_groups_group_id_2f3517aa_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_groups
+    ADD CONSTRAINT users_groups_group_id_2f3517aa_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_groups users_groups_user_id_f500bee5_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_groups
+    ADD CONSTRAINT users_groups_user_id_f500bee5_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_permissions users_user_permissio_permission_id_6d08dcd2_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_user_permissions
+    ADD CONSTRAINT users_user_permissio_permission_id_6d08dcd2_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_permissions users_user_permissions_user_id_92473840_fk_users_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users_user_permissions
+    ADD CONSTRAINT users_user_permissions_user_id_92473840_fk_users_id FOREIGN KEY (user_id) REFERENCES public.users(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: workshop workshop_company_id_befbf843_fk_company_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.workshop
+    ADD CONSTRAINT workshop_company_id_befbf843_fk_company_id FOREIGN KEY (company_id) REFERENCES public.company(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -1,0 +1,3 @@
+INSERT INTO public.oauth2_provider_application (client_id,redirect_uris,client_type,authorization_grant_type,client_secret,"name",user_id,skip_authorization,created,updated) VALUES 
+('LJUiw5yOp0eEfs8l1EDdHbAaozRha4odpC3cCZde','','confidential','password','oeBsob03pSzaezb9WK4PvFeV97Jxek573BR5ctUCkq2DBGbTvrAB6pgJkRFgQ2Xl8MvqlkQolbcG0XFiRGVQFP1Yw0rIcE8TqZBkc29GiOg0E9Afb7JaPTpjtLVkovjt','PRODUCTION',3,false,'2020-03-04 17:50:45.331','2020-03-04 17:50:45.331')
+;

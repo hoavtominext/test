@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<body bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};-webkit-font-smoothing: antialiased;-webkit-text-size-adjust: none;height: 100%;width: 100%!important;">
+    <!-- BODY -->
+    <table class="body-wrap" bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};width: 100%;">
+        <tr style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};">
+            <td class="container" bgcolor="{{ settings.EMAIL.CONTENT_COLOR }}" style="margin: 0 auto!important;padding: 0;{{ settings.EMAIL.FONT_CSS }};display: block!important;clear: both!important;">
+
+                {% block content %}{% endblock %}
+
+            </td>
+        </tr>
+    </table>
+    <!-- /BODY -->
+
+    <table class="body-wrap" bgcolor="{{ settings.EMAIL.BG_COLOR }}" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};width: 100%;">
+        <tr>
+            <td>
+                <p>
+                    ***************************************************************************<br>
+                    株式会社コーチ・エィ／3分間コーチサポート　<br>
+                    102-0074　東京都千代田区九段南2-1-30<br>
+                    イタリア文化会館ビル　9階・10階<br>
+                    coacha_3mins@coacha.com　<br>
+                    ****************************************************************************"<br>
+                </p>
+
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

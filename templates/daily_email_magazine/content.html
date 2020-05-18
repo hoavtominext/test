@@ -1,0 +1,17 @@
+{% extends "email/email_base.html" %}
+
+{% block content %}
+    <p class="lead" style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+         {{ full_name }}様 <br><br>
+        【3分間コーチ】フォローアップメールマガジン”3 Minutes Tips”をお届けします。<br><br>
+        今回のテーマはこちらです。参加者様専用サイトにログインの上、ご覧ください。<br><br>
+        <a href="{{ url_email_magazine }}">{{ url_email_magazine }}</a><br><br>
+    </p>
+    <br>
+    ▼メールマガジン配信停止<br>
+    <a href="https://3mins.coacha.com/mail-magazine-setting">https://3mins.coacha.com/mail-magazine-setting</a><br>
+    ※本メールマガジンの記事について、無断転載および転送はご遠慮ください。<br>
+{% endblock %}
+
+{% block unsubscribe %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "email/email_base.html" %}
+
+{% block content %}
+    <p class="lead"
+       style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        {{ first_name }}　{{ last_name }}　様
+    </p>
+    <p class="lead"
+       style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        御社の人事部の {{ admin_name }}様より、
+        3分間コーチセミナーへの参加依頼が来ています。
+    </p>
+
+    <p class="lead"
+       style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        開催日時は、{{ workshop_month }}月{{ workshop_day }}日午前９時～セミナールームにて行います。
+    </p>
+    <p class="lead"
+       style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        Complete Questions: </p>
+    <p> 個別対応 : {{ score_personal_reciprocal }} </p>
+    <p> 前進 : {{ score_advance }} </p>
+    <p> 傾聴 : {{ score_listen }} </p>
+    <p> 継続 : {{ score_retention }} </p>
+    <p> 質問 : {{ score_ask_questions }} </p>
+    <p> 目的共有 : {{ score_sharing_purpose }} </p>
+    <p class="lead"
+       style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        <a href="{{ url }}" class="btn-primary"
+           style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};color: #2BA6CB;font-weight: bold;">Link review
+            chart</a>
+    </p>
+
+{% endblock %}
+
+{% block unsubscribe %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "email/email_base.html" %}
+
+{% block content %}
+     <p class="lead" style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;">{{ full_name }} 様</p>
+     <p style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;">あなたのアカウントは複数回ログインを失敗したため、ロックされました。</p>
+     <p style="margin: 0;padding: 0;{{ settings.EMAIL.FONT_CSS }};margin-bottom: 10px;font-weight: normal;font-size: 14px;line-height: 1.6;">ロックを解除するためには、下記のURLからパスワードの再設定を行ってください。</p>
+     <p class="body-wrap" >▼パスワード再設定 <br/><a  href="{{reset_password_url}}">{{ reset_password_url }}</a> </p>
+{% endblock %}
+
+{% block unsubscribe %}
+{% endblock %}

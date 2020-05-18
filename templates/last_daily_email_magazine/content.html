@@ -1,0 +1,30 @@
+{% extends "email/email_base.html" %}
+
+{% block content %}
+    <p class="lead" style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+            {{ full_name }}様 <br><br>
+            3ヵ月間のフォローアッププログラムは今回をもって修了となります。<br>
+            3ヵ月前を振り返ってみて、3分間コーチを取り入れた部下の方々との対話はどのように変化しましたか？<br><br>
+
+            最後のテーマはこちらです。<br>
+            参加者様専用サイトにログインの上、ご覧ください。<br><br>
+
+            ▼セルフトークを起こす(気づき、熟考、選択、行動) <br>
+            <a href="{{ url_email_magazine }}" >{{ url_email_magazine }}</a> <br><br>
+
+            3分間コーチを継続的に行えば、さらなる変化を実感されることと思います。引き続き、取り組んでみてください。<br><br>
+
+            コーチングにつきましてはHello, Coaching!にて、多くのコンテンツが紹介されています。ぜひ、メールマガジンを登録し、あなたのコーチングのヒントとしてご活用ください。<br>
+        <br>
+        ▼Hello, Coaching!<br>
+        <a href="https://coach.co.jp">https://coach.co.jp</a>
+    </p>
+
+    <br>
+    ▼メールマガジン配信停止<br>
+    <a href="https://3mins.coacha.com/mail-magazine-setting">https://3mins.coacha.com/mail-magazine-setting</a><br>
+    ※本メールマガジンの記事について、無断転載および転送はご遠慮ください。<br>
+{% endblock %}
+
+{% block unsubscribe %}
+{% endblock %}

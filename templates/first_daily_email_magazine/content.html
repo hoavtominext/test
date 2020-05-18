@@ -1,0 +1,18 @@
+{% extends "email/email_base.html" %}
+
+{% block content %}
+    <p class="lead" style="margin: 0;padding: 0;margin-bottom: 10px;font-weight: normal;font-size: 17px;line-height: 1.6;">
+        {{ full_name }}様 <br><br>
+        このたびは、「3分間コーチ」ワークショップにご参加いただきありがとうございました。 <br><br>
+        あなたが部下とともに組織の未来に向けて変化を創り出していくためには、「3分間コーチ」の継続が大事です。それを促進するものとして、これから3ヶ月にわたり週2回、学習コンテンツを配信いたします。 <br><br>
+        題して「3 Minutes Tips（3分間のヒント）」。<br><br>
+        3分で見られるビデオと、3分で読める記事の2種類を、毎週お送りします。どうぞ、「3分間コーチ」を継続するためのヒントとしてお役立てください。<br><br>
+    </p>
+    <br>
+    ▼メールマガジン配信停止<br>
+    <a href="https://3mins.coacha.com/mail-magazine-setting">https://3mins.coacha.com/mail-magazine-setting</a><br>
+    ※本メールマガジンの記事について、無断転載および転送はご遠慮ください。<br>
+{% endblock %}
+
+{% block unsubscribe %}
+{% endblock %}
