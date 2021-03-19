@@ -3,7 +3,7 @@ pytz==2019.3
 sqlparse==0.3.0
 psycopg2-binary==2.8.4
 pip==19.3.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 markdown==3.1.1
 django-filter==2.2.0
 pygments==2.4.2
